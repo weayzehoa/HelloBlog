@@ -15,6 +15,32 @@
                         </a>
                     </div>
                 @endauth
+
+                <!-- 如果get收到參數有type顯示出文章類型名稱並秀出該類型文章在判斷有無登入，有登入把分類的編輯與刪除按鈕顯示出來 -->
+                @isset($type)
+                    分類：{{ $type->name }}
+                    @auth
+                        <div class="float-right">
+                            <form action="{{ route('types.destroy', $type->id) }}" method="POST">
+                                <span class="ml-2">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                        <span class="pl-1">刪除分類</span>
+                                    </button>
+                                </span>
+                            </form>
+                        </div>
+                        <div class="float-right">
+                            <a href="{{ route('types.edit', $type->id) }}" class="btn btn-sm btn-primary ml-2">
+                                <i class="fas fa-pencil-alt"></i>
+                                <span class="pl-1">編輯分類</span>
+                            </a>
+                        </div>
+                    @endauth
+                @endisset
+
                 @isset($keyword) <!-- 判斷是否有收到 keyword 關鍵字 -->
                     搜尋：{{ $keyword }}
                 @else
@@ -83,6 +109,30 @@
                 </div>
             @endforeach
         </div>
+
+        <!-- 右側文章類別清單建立 -->
+        <div class="col-md-4">
+            <div class="list-group">
+                <a href="{{ route('posts.index') }}" class=" list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ (isset($type))?'':'active' }}">
+                    全部分類
+                    <span class="badge badge-secondary badge-pill">{{ $posts_total }}</span>
+                </a>
+                <!-- 顯示所有文章類別, 每一項都帶有$post_types的資料表id -->
+                @foreach ($post_types as $post_type)
+                    <a href="{{ route('types.show', $post_type->id) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ (isset($type))?(($type->id == $post_type->id)?'active':''):'' }}">
+                        {{ $post_type->name }}
+                        <span class="badge badge-secondary badge-pill">
+                            {{ $post_type->posts->count() }}
+                        </span>
+                    </a>
+                @endforeach
+                <!-- 若管理員有登入則顯示 -->
+                @auth
+                    <a href="{{ route('types.create') }}" class="list-group-item list-group-item-action">建立新分類</a>
+                @endauth
+            </div>
+        </div>
+
     </div>
     <div class="row pt-2">
         <div class="col-md-8">

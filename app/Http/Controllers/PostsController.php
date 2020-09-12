@@ -37,7 +37,6 @@ class PostsController extends Controller
         $post_types = PostTypeEloquent::orderBy('name', 'ASC')->get();
         $posts_total = PostEloquent::get()->count();
         return View::make('posts.index', compact('posts','post_types','posts_total'));
-        return View::make('posts.index', compact('posts'));
     }
     /**
      * Show the form for creating a new resource.

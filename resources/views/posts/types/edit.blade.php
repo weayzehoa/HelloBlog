@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     <div class="container-fluid p-0">
-                        <form action="{{ route('types.update', ['id' => $post_type->id]) }}" method="POST" class="mt-2">
+                        <form action="{{ route('types.update', $post_type->id) }}" method="POST" class="mt-2">
                             @csrf
                             <input name="_method" type="hidden" value="PUT" />
                             <div class="form-group row">

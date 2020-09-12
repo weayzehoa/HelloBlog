@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+//別忘記這行，需要檢驗是否登入
 use Auth;
 
 class PostTypeRequest extends FormRequest
@@ -14,6 +15,7 @@ class PostTypeRequest extends FormRequest
      */
     public function authorize()
     {
+        //返回是否驗證成功
         return Auth::check();
     }
 
@@ -24,6 +26,7 @@ class PostTypeRequest extends FormRequest
      */
     public function rules()
     {
+        //檢查 name 欄位是否符合
         return [
             'name' => 'required|string'
         ];
