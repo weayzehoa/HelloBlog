@@ -34,9 +34,7 @@ class PostsController extends Controller
     public function index()
     {
         $posts = PostEloquent::orderBy('created_at', 'DESC')->paginate(5);
-        $post_types = PostTypeEloquent::orderBy('name', 'ASC')->get();
-        $posts_total = PostEloquent::get()->count();
-        return View::make('posts.index', compact('posts','post_types','posts_total'));
+        return View::make('posts.index', compact('posts'));
     }
     /**
      * Show the form for creating a new resource.

@@ -64,9 +64,7 @@ class PostTypesController extends Controller
         //找出分類的id 並將屬於此id的文章回傳出去給 posts.index
         $type = PostTypeEloquent::findOrFail($id);
         $posts = PostEloquent::where('type', $id)->orderBy('created_at', 'DESC')->paginate(5);
-        $post_types = PostTypeEloquent::orderBy('name','ASC')->get();
-        $posts_total = PostEloquent::where('type', $id)->get()->count();
-        return View::make('posts.index', compact('posts', 'type','post_types','posts_total'));
+        return View::make('posts.index', compact('posts', 'type'));
     }
 
     /**
