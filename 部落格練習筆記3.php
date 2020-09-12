@@ -114,20 +114,18 @@ public function index()
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-8">
-                                    @auth
-                                        <form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="POST">
-                                            @csrf
-                                            <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <span class="pl-1">編輯文章</span>
-                                            </a>
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash"></i>
-                                                <span class="pl-1">刪除文章</span>
-                                            </button>
-                                        </form>
-                                    @endauth
+                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                        @csrf
+                                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            <span class="pl-1">編輯文章</span>
+                                        </a>
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                            <span class="pl-1">刪除文章</span>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -180,9 +178,9 @@ public function show($id)
                     <h1>{{ $post->title }}</h1>
                     @auth
                         <div class="float-right ml-auto">
-                            <form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="POST">
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                                 @csrf
-                                <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary">
                                     <i class="fas fa-pencil-alt"></i>
                                     <span class="pl-1">編輯文章</span>
                                 </a>

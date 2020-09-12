@@ -46,7 +46,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        //將所有文章類型撈出來並拋到新增頁面
+        $post_types = PostTypeEloquent::orderBy('name', 'ASC')->get();
+        return View::make('posts.create', compact('post_types'));
     }
 
     /**
@@ -55,9 +57,15 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        //將所有資料收集
+        $post = new PostEloquent($request->all());
+        //透過驗證使用者並取得id
+        $post->user_id = Auth::user()->id;
+        //儲存
+        $post->save();
+        return Redirect::route('posts.index');
     }
 
     /**
@@ -81,7 +89,10 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        //先找出要編輯的資料並拋出到編輯頁面
+        $post = PostEloquent::findOrFail($id);
+        $post_types = PostTypeEloquent::orderBy('name' , 'ASC')->get();
+        return View::make('posts.edit', compact('post', 'post_types'));
     }
 
     /**
@@ -91,9 +102,13 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //
+        //透過id將進來的資料填寫到資料庫後返回index()
+        $post = PostEloquent::findOrFail($id);
+        $post->fill($request->all());
+        $post->save();
+        return Redirect::route('posts.index');
     }
 
     /**
@@ -104,6 +119,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //透過id找到文章後直接刪除
+        //裡面可以寫一些後續的動作, 例如log或刪除檔案
     }
 }

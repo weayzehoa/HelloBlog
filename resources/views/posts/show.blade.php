@@ -7,13 +7,13 @@
     <div class="col-md-10 offset-md-1">
         <div class="row">
             <div class="col-sm-12 pb-2 mt-4 mb-2 border-bottom">
-                <div class="row">   
+                <div class="row">
                     <h1>{{ $post->title }}</h1>
                     @auth
                         <div class="float-right ml-auto">
-                            <form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="POST">
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                                 @csrf
-                                <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary">
                                     <i class="fas fa-pencil-alt"></i>
                                     <span class="pl-1">編輯文章</span>
                                 </a>
