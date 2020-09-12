@@ -41,7 +41,8 @@ return [
     'distinct' => 'The :attribute field has a duplicate value.',
     'email' => 'The :attribute must be a valid email address.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
-    'exists' => 'The selected :attribute is invalid.',
+    // 'exists' => 'The selected :attribute is invalid.',
+    'exists' => ':attribute 欄位所選擇的值是無效的。',
     'file' => 'The :attribute must be a file.',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
@@ -96,7 +97,8 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    // 'required' => 'The :attribute field is required.',
+    'required' => '必須填寫 :attribute 欄位哦!',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -146,10 +148,6 @@ return [
     |
     */
 
-    'attributes' => [
-        'title' => '標題',
-        'type' => '類型',
-        'content' => '內文',
-    ],
+    'attributes' => [],
 
 ];
