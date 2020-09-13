@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 //別忘記這兩行務必要寫, 關聯使用 User 與 PostType 模型
 use App\User as UserEloquent;
 use App\PostType as PostTypeEloquent;
+//關聯 Comment 模型
+use App\Comment as CommentEloquent;
 
 class Post extends Model
 {
@@ -21,6 +23,10 @@ class Post extends Model
     //type欄位與post_types資料表一對一關聯
 	public function postType(){
 		return $this->belongsTo(PostTypeEloquent::class, 'type');
+    }
+    //關聯comments
+    public function comments(){
+        return $this->hasMany(CommentEloquent::class);
     }
     /*
         補充說明
