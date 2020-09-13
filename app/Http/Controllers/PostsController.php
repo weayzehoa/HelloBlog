@@ -126,8 +126,8 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //透過id找到文章後在找出相關的留言刪除
-        $comments = CommentEloquent::where('post_id', $post_id);
-        $comments->delete();
+        $post = PostEloquent::where('id', $id)->delete();
+        $comments = CommentEloquent::where('post_id', $id)->delete();
         return Redirect::back();
     }
 

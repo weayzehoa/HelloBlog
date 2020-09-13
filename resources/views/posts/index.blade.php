@@ -87,22 +87,28 @@
                             <div class="row mt-2">
                                 <div class="col-md-8">
                                     @auth
-                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                            @csrf
-                                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <span class="pl-1">編輯文章</span>
-                                            </a>
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash"></i>
-                                                <span class="pl-1">刪除文章</span>
-                                            </button>
-                                        </form>
+                                        @if (Auth::user()->isAdmin() || Auth::id() == $post->user_id)
+                                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                                @csrf
+                                                <span class="mr-1">{{ $post->comments->count() }}&nbsp;則回應</span>
+                                                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-md btn-primary">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                    <span class="pl-1">編輯文章</span>
+                                                </a>
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-md btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                    <span class="pl-1">刪除文章</span>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <span class="mr-1">{{ $post->comments->count() }}&nbsp;則回應</span>
+                                        @endif
+                                    @else
+                                        <span class="mr-1">{{ $post->comments->count() }}&nbsp;則回應</span>
                                     @endauth
                                 </div>
                                 <div class="col-md-4">
-                                    <!-- 導向該篇文章 -->
                                     <a href="{{ route('posts.show', $post->id) }}" class="float-right card-link">繼續閱讀...</a>
                                 </div>
                             </div>
