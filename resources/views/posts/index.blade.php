@@ -20,24 +20,26 @@
                 @isset($type)
                     分類：{{ $type->name }}
                     @auth
-                        <div class="float-right">
-                            <form action="{{ route('types.destroy', $type->id) }}" method="POST">
-                                <span class="ml-2">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                        <span class="pl-1">刪除分類</span>
-                                    </button>
-                                </span>
-                            </form>
-                        </div>
-                        <div class="float-right">
-                            <a href="{{ route('types.edit', $type->id) }}" class="btn btn-sm btn-primary ml-2">
-                                <i class="fas fa-pencil-alt"></i>
-                                <span class="pl-1">編輯分類</span>
-                            </a>
-                        </div>
+                        @if (Auth::user()->isAdmin())
+                            <div class="float-right">
+                                <form action="{{ route('types.destroy', $type->id) }}" method="POST">
+                                    <span class="ml-2">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-md btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                            <span class="pl-1">刪除分類</span>
+                                        </button>
+                                    </span>
+                                </form>
+                            </div>
+                            <div class="float-right">
+                                <a href="{{ route('types.edit', $type->id) }}" class="btn btn-md btn-primary ml-2">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    <span class="pl-1">編輯分類</span>
+                                </a>
+                            </div>
+                        @endif
                     @endauth
                 @endisset
 

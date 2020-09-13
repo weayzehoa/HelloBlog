@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Post as PostEloquent; //posts資料表
 use App\PostType as PostTypeEloquent; //post_types資料表
+use App\Comment as CommentEloquent; //comments資料表
 use Carbon\Carbon; //時間格式套件
 use Auth;   //使用者驗證
 use View;   //視圖
@@ -81,7 +82,9 @@ class PostsController extends Controller
     {
         //將id帶入並找文章顯示到視圖
         $post = PostEloquent::findOrFail($id);
-        return View::make('posts.show', compact('post'));
+        //將post id帶入comment找出留言資料
+        $comments = CommentEloquent::where('post_id',$post->id)->orderBy('created_at','DESC')->paginate(5);
+        return View::make('posts.show', compact('post','comments'));
     }
 
     /**
@@ -122,7 +125,10 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //透過id找到文章後直接刪除
-        //裡面可以寫一些後續的動作, 例如log或刪除檔案
+        //透過id找到文章後在找出相關的留言刪除
+        $comments = CommentEloquent::where('post_id', $post_id);
+        $comments->delete();
+        return Redirect::back();
     }
+
 }
