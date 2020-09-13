@@ -19,5 +19,12 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('admin'),
             'type' => 1,
         ]);
+        //建立一筆使用者
+        UserEloquent::create([
+            'name' => '使用者',
+            'email' => 'user@mail.com',
+            'password' => bcrypt('user'),
+            'type' => 0,
+        ]);
     }
 }

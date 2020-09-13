@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 use App\User as UserEloquent;
 use App\Post as PostEloquent;
 use App\PostType as PostTypeEloquent;
+use App\PostType as CommentEloquent;
 
 class PostsTableSeeder extends Seeder
 {
@@ -25,5 +26,7 @@ class PostsTableSeeder extends Seeder
             $post->type = $postTypes[mt_rand(0, (count($postTypes)-1))]->id;
             $post->save();
         });
+        //留言資料
+        $comments = factory(CommentEloquent::class, 300)->create();
     }
 }
