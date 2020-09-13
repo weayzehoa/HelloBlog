@@ -42,3 +42,39 @@ Route::prefix('login/social')->name('social.')->group(function(){
     Route::get('{provider}/redirect', 'Auth\SocialController@getSocialRedirect')->name('redirect');
     Route::get('{provider}/callback', 'Auth\SocialController@getSocialCallback')->name('callback');
 });
+
+/*
+    2. 安裝第三方帳號登入套件
+        a. composer require laravel/socialite
+        b. 註冊別名、發布設定檔, 在config\app.php檔案中
+
+            Providers 中新增
+            Laravel\Socialite\SocialiteServiceProvider::class,
+
+            Aliases 中新增
+            'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        c. 設定 .env 加入資料
+            FACEBOOK_API_ID =
+            FACEBOOK_API_SECRET =
+            FACEBOOK_API_CALLBACK = https://localhost/login/social/facebook/callback
+
+            GOOGLE_API_ID =
+            GOOGLE_API_SECRET =
+            GOOGLE_CALLBACK =  https://localhost/login/social/google/callback
+
+        d. 修改 config\services.php 加入資料
+
+                'facebook' => [
+                    'client_id' => env('FACEBOOK_API_ID'),
+                    'client_secret' => env('FACEBOOK_API_SECRET'),
+                    'redirect' => env('FACEBOOK_CALLBACK'),
+                ],
+
+                'google' => [
+                    'client_id' => env('GOOGLE_API_ID'),
+                    'client_secret' => env('GOOGLE_API_SECRET'),
+                    'redirect' => env('GOOGLE_CALLBACK'),
+                ],
+
+*/

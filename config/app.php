@@ -166,7 +166,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        //第三方帳號登入
+        Laravel\Socialite\SocialiteServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -226,7 +227,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        //第三方帳號登入
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
