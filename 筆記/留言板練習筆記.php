@@ -1,23 +1,9 @@
 <?php
-
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+    在部落格上面加上留言版
+    1. 修改 Route
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-/*
-    1. 規劃與建立路由
-*/
 //文章內容及類型，對應resource控制器，PostTypes控制器不需要產生index方法，所以用except來排除
 //主要利用 php artisan make:controller PostsController --resource 直接產生七大function
 //然後排除掉 index 不使用, 這樣就不用寫一堆route
