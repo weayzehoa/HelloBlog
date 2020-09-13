@@ -25,6 +25,12 @@ class PostsController extends Controller
                 'index', 'show'
             ]
         ]);
+        //新增 admin 的 middleware 套用到 edit, update, destroy
+        $this->middleware(['admin'],[
+            'only' => [
+                'edit','update','destroy'
+            ]
+        ]);
     }
     /**
      * Display a listing of the resource.
