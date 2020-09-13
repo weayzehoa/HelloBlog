@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 use App\User as UserEloquent;
 use App\Post as PostEloquent;
 use App\PostType as PostTypeEloquent;
-use App\PostType as CommentEloquent;
+use App\Comment as CommentEloquent;
 
 class PostsTableSeeder extends Seeder
 {
